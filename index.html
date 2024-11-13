@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio Web</title>
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- Enlace a la librería de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Enlace a la librería Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Formulario de inicio de sesión -->
+    <div id="loginForm">
+        <img src="images/logo.png" alt="Logo de Brennstoff" class="logo">
+        <h2>Iniciar Sesión</h2>
+        <form id="formLogin">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <div id="loginError" style="color: red;"></div>
+    </div>
+
+    <!-- Encabezado de la página -->
+    <header class="hidden">
+        <h1>Bienvenido a la Plataforma de Análisis de Datos</h1>
+    </header>
+
+    <!-- Barra de navegación funcional -->
+    <nav class="hidden">
+        <ul class="menu-navegacion">
+            <li><a href="#resumen-general">Inicio</a></li>
+            <li><a href="#dispositivos">Dispositivos</a></li>
+            <li><a href="#gps">Datos GPS</a></li>
+            <li><a href="#estado-dispositivos">Estado de Dispositivos</a></li>
+            <li><a href="#analisis">Análisis</a></li>
+            <li><a href="#analisis-financiero">Análisis Financiero</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido principal con secciones separadas y espaciadas -->
+    <main class="hidden">
+        <!-- Sección Resumen General -->
+        <section id="resumen-general">
+            <h2>Resumen General</h2>
+            <p>Aquí verás un resumen de los datos recolectados.</p>
+        </section>
+
+        <!-- Sección Dispositivos -->
+        <section id="dispositivos">
+            <h2>Listado de Dispositivos</h2>
+            <input type="text" id="campoBusqueda" placeholder="Buscar dispositivo..." />
+            <button id="cargarDatos" class="boton-cargar">Cargar Datos</button>
+            <table id="tablaDispositivos">
+                <thead>
+                    <tr>
+                        <th>ID del Dispositivo</th>
+                        <th>Licencia del Carro</th>
+                        <th>Grupo</th>
+                        <th>Tipo de Dispositivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenan los datos de la API -->
+                </tbody>
+            </table>
+            <!-- Paginación -->
+            <div class="paginacion">
+                <button id="anterior" class="boton-paginacion">Anterior</button>
+                <span id="infoPagina"></span>
+                <button id="siguiente" class="boton-paginacion">Siguiente</button>
+            </div>
+        </section>
+
+        <!-- Sección GPS -->
+        <section id="gps">
+            <h2>Datos GPS</h2>
+            <button id="cargarDatosGPS" class="boton-cargar">Cargar Datos GPS</button>
+            <div id="dispositivoSeleccionado" style="margin-top: 10px; font-weight: bold;"></div>
+            <div id="resultadoGPS"></div>
+            <!-- Mapa GPS -->
+            <div id="mapaGPS" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+        </section>
+        
+        <!-- Sección Análisis Financiero -->
+        <section id="analisis-financiero">
+            <h2>Análisis Financiero</h2>
+            <div id="panelIngresos">
+                <h3>Estadísticas Financieras</h3>
+                <div id="ingresosTotales"></div>
+                <div id="totalPasajeros"></div>
+                <canvas id="graficoIngresos" style="max-width: 100%; height: 300px"></canvas>
+            </div>
+            <div id="tablaIngresos-container">
+                <table id="tablaIngresos">
+                    <thead>
+                        <tr>
+                            <th>Intervalo de Tiempo</th>
+                            <th>Pasajeros Subidos</th>
+                            <th>Ingresos Generados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filas de ingresos por intervalo de tiempo se llenan dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección Análisis de Datos -->
+        <section id="analisis">
+            <h2>Análisis de Datos</h2>
+            <p>Aquí se realizarán análisis detallados con gráficos y más.</p>
+            <label for="fechaInicio">Fecha de inicio:</label>
+            <input type="date" id="fechaInicio">
+            <label for="horaInicio">Hora de inicio:</label>
+            <input type="time" id="horaInicio" value="00:00">
+
+            <label for="fechaFin">Fecha de fin:</label>
+            <input type="date" id="fechaFin">
+            <label for="horaFin">Hora de fin:</label>
+            <input type="time" id="horaFin" value="23:59">
+
+            <button id="filtrarConteoPasajeros" class="boton-cargar">Filtrar</button>
+            <button id="hoyConteoPasajeros" class="boton-cargar">Conteo de Hoy</button>
+            <div id="resultadoConteo" style="margin-top: 10px;">Cargando conteo de pasajeros...</div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="hidden">
+        <p>© 2024 Mi Sitio Web</p>
+    </footer>
+
+    <!-- Enlace al archivo JavaScript principal (main.js) -->
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/graficos.js"></script>
+</body>
+</html>
